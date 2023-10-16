@@ -6,7 +6,7 @@
 /*   By: mtoia <mtoia@student.42roma.it>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 16:08:18 by mtoia             #+#    #+#             */
-/*   Updated: 2023/10/16 13:03:00 by mtoia            ###   ########.fr       */
+/*   Updated: 2023/10/16 14:35:01 by mtoia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 # define BUREAUCRAT_HPP
 
 #include <iostream>
-#include <exception>
+#include "Form.hpp"
+
+class Form;
 
 class Bureucrat
 {
@@ -32,7 +34,7 @@ class Bureucrat
 		int getGrade() const;
 		void incrementGrade();
 		void decrementGrade();
-
+		void signForm(Form &form);
 		class GradeTooHighException : public std::exception
 		{
 			public:

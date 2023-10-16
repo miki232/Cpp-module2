@@ -6,7 +6,7 @@
 /*   By: mtoia <mtoia@student.42roma.it>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 16:23:39 by mtoia             #+#    #+#             */
-/*   Updated: 2023/10/16 14:02:39 by mtoia            ###   ########.fr       */
+/*   Updated: 2023/10/16 14:31:14 by mtoia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,20 @@ void Bureucrat::decrementGrade()
         this->_grade++;
         std::cout << "Bureucrat " << this->_name << " has been demoted to " << this->getGrade() << " grade" << std::endl;
     }
+}
+
+void Bureucrat::signForm(Form &form)
+{
+    try
+    {
+        form.beSigned(*this);
+        std::cout << this->_name << " signs " << form.getName() << std::endl;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << this->_name << " cannot sign " << form.getName() << " because " << e.what() << '\n';
+    }
+    
 }
 
 const char *Bureucrat::GradeTooHighException::what() const throw()
