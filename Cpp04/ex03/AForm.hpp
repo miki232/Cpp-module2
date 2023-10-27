@@ -6,7 +6,7 @@
 /*   By: mtoia <mtoia@student.42roma.it>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:04:56 by mtoia             #+#    #+#             */
-/*   Updated: 2023/10/23 12:01:15 by mtoia            ###   ########.fr       */
+/*   Updated: 2023/10/27 15:15:40 by mtoia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ class AForm
         AForm();
         AForm(AForm &other);
         AForm(std::string const name, int gradeToSign, int gradeToExecute);
-        ~AForm();
+        virtual ~AForm();
         AForm &operator=(const AForm &other);
         std::string const getName() const;
         bool    getSigned() const;

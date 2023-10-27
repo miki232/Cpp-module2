@@ -6,7 +6,7 @@
 /*   By: mtoia <mtoia@student.42roma.it>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 11:14:02 by mtoia             #+#    #+#             */
-/*   Updated: 2023/10/23 12:09:35 by mtoia            ###   ########.fr       */
+/*   Updated: 2023/10/27 16:29:25 by mtoia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,36 +16,30 @@
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
+#include "Intern.hpp"
 
-int	main(void)
-{
-	Bureucrat prot("Prot", 4);
-	Bureucrat top("Top", 73);
-	PresidentialPardonForm bau("bau");
-	RobotomyRequestForm miao("miao");
-	ShrubberyCreationForm chip("Garden");
+int main () {
 
-	std::cout << std::endl << std::endl;
-	prot.executeForm(chip);
-	chip.beSigned(prot);
-	prot.executeForm(chip);
-	top.executeForm(chip);
-	std::cout << std::endl << std::endl;
+	Bureucrat bureaucrat("Sto Cazzo", 1);
+	Intern someRandomIntern;
+	AForm *rrf;
+	AForm *ppf;
+	AForm *scf;
 
-	std::cout << std::endl;
-	prot.executeForm(miao);
-	miao.beSigned(prot);
-	prot.executeForm(miao);
-	prot.executeForm(miao);
-	top.executeForm(miao);
-	top.executeForm(miao);
-	std::cout << std::endl << std::endl;
+	ppf = someRandomIntern.makeForm("presidential pardon", "Philip");
+	rrf = someRandomIntern.makeForm("robotomy request", "Sheldon");
+	scf = someRandomIntern.makeForm("shrubbery creation", "Garden");
+	someRandomIntern.makeForm("Daje Roma", "JAJAJAHOOo");
+	bureaucrat.signForm(*ppf);
+	bureaucrat.executeForm(*ppf);
+	bureaucrat.signForm(*rrf);
+	bureaucrat.executeForm(*rrf);
+	bureaucrat.signForm(*scf);
+	bureaucrat.executeForm(*scf);
 
-	prot.executeForm(bau);
-	bau.beSigned(prot);
-	prot.executeForm(bau);
-	std::cout << std::endl;
-	top.executeForm(bau);
-	std::cout << std::endl << std::endl;
+	delete ppf;
+	delete rrf;
+	delete scf;
+
 	return (0);
 }

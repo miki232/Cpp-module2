@@ -27,7 +27,7 @@ AForm::AForm(std::string const name, int gradeToSign, int gradeToExecute) : _nam
         std::cout << "AForm " << this->_name << " has been created with " << this->_gradeToSign << " grade to sign and " << this->_gradeToExecute << " grade to execute" << std::endl;
 }
 
-AForm::AForm(AForm const &other) : _name(other._name), _signed(other._signed), _gradeToSign(other._gradeToSign), _gradeToExecute(other._gradeToExecute)
+AForm::AForm(AForm &other) : _name(other._name), _signed(other._signed), _gradeToSign(other._gradeToSign), _gradeToExecute(other._gradeToExecute)
 {
     std::cout << "Copy constructor called" << std::endl;
 }
@@ -73,6 +73,16 @@ void    AForm::beSigned(Bureucrat &bureucrat)
         this->_signed = true;
 }
 
+void    AForm::execute(Bureucrat const &executor) const
+{
+    if (this->_signed == false)
+        throw (AForm::FormUnsignedException());
+    else if (executor.getGrade() > this->_gradeToExecute)
+        throw (AForm::GradeTooLowException());
+    else
+        this->action();
+}
+
 const   char* AForm::GradeTooHighException::what() const throw()
 {
     return ("Grade too high");
@@ -81,6 +91,11 @@ const   char* AForm::GradeTooHighException::what() const throw()
 const   char* AForm::GradeTooLowException::what() const throw()
 {
     return ("Grade too low");
+}
+
+const   char* AForm::FormUnsignedException::what() const throw()
+{
+    return ("Form is unsigned");
 }
 
 std::ostream & operator<<(std::ostream & out, AForm const & in)

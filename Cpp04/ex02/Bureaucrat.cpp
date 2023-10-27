@@ -6,7 +6,7 @@
 /*   By: mtoia <mtoia@student.42roma.it>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 16:23:39 by mtoia             #+#    #+#             */
-/*   Updated: 2023/10/16 14:31:14 by mtoia            ###   ########.fr       */
+/*   Updated: 2023/10/23 12:01:42 by mtoia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void Bureucrat::decrementGrade()
     }
 }
 
-void Bureucrat::signForm(Form &form)
+void Bureucrat::signForm(AForm &form)
 {
     try
     {
@@ -90,7 +90,21 @@ void Bureucrat::signForm(Form &form)
     }
     catch(const std::exception& e)
     {
-        std::cerr << this->_name << " cannot sign " << form.getName() << " because " << e.what() << '\n';
+        std::cerr << this->_name << " cannot sign " << form.getName() << " because " << e.what() << std::endl;
+    }
+    
+}
+
+void    Bureucrat::executeForm(AForm const &form) const
+{
+    try
+    {
+        form.execute(*this);
+        std::cout << this->_name << " executes " << form.getName() << std::endl;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << _name << " can not execute " << form.getName() << " because " << e.what() << std::endl;
     }
     
 }
