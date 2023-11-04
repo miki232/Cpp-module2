@@ -22,6 +22,7 @@ Base* generate(void){
 }
 
 void identify(Base* p){
+    std::cout << "Identify pointer type: ";
     if (dynamic_cast<BaseA*>(p)){
         std::cout << "Base_A" << std::endl;
     } else if (dynamic_cast<BaseB*>(p)){
@@ -35,6 +36,7 @@ void identify(Base* p){
 
 void identify(Base& p)
 {
+    std::cout << "Identify reference type: ";
     try {
         BaseA& a = dynamic_cast<BaseA&>(p);
         std::cout << "Base_A" << std::endl;
