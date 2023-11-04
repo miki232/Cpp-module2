@@ -7,14 +7,15 @@
 
 #include <iostream>
 #include <stdlib.h>
+#include "Data.hpp"
 
-typedef struct Data
-{
-    int	number;
-}	Data;
-
-class Serial {
+class Serializer {
+    private:
+        Serializer();
+        Serializer(const Serializer& src);
     public:
+        Serializer& operator=(const Serializer& rhs);
+        ~Serializer();
         static uintptr_t serialize(Data* ptr);
         static Data* deserialize(uintptr_t raw);
 };

@@ -2,27 +2,25 @@
 // Created by mtoia on 11/2/23.
 //
 
+#include <iostream>
 #include "Serial.hpp"
+#include "Data.hpp"
 
-int	main(int argc, char** argv)
-{
-    Data origin;
-    Data *destination;
-    uintptr_t result;
+int main() {
+    Data data;
+    data.value = 42;
 
-    origin.number = 42;
+    uintptr_t serializedPtr = Serializer::serialize(&data);
+    Data* deserializedPtr = reinterpret_cast<Data*>(Serializer::deserialize(serializedPtr));
 
-    try
-    {
-        result = Serial::serialize(&origin);
-        destination = Serial::deserialize(result);
-        std::cout << "Origin serialized: " << origin.number << std::endl;
-        std::cout << "Destination deserialize: " << destination->number << std::endl;
-        std::cout << "reinterpret_cast success. " << std::endl;
+    std::cout << "data.value: " << data.value << std::endl;
+    std::cout << "deserializedPtr->value: " << deserializedPtr->value << std::endl;
+
+    if (deserializedPtr == &data) {
+        std::cout << "Serialization and deserialization successful. Pointers match." << std::endl;
+    } else {
+        std::cout << "Serialization or deserialization failed. Pointers do not match." << std::endl;
     }
-    catch(const std::exception& e)
-    {
-        std::cout << "Fail." << std::endl;
 
-    }
+    return 0;
 }
