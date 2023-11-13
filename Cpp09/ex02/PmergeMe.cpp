@@ -2,6 +2,7 @@
 
 PmergeMe::PmergeMe(int argc, char **argv)
 {
+    this->flag = false;
     if ((argc - 1) % 2 != 0)
     {
         this->flag = true;
@@ -13,25 +14,31 @@ PmergeMe::PmergeMe(int argc, char **argv)
         }
         argc -= 1;
     }
-    for (size_t i = 1; i < argc - 1; i+=2)
+    else if (argc == 1)
+    {
+        std::cout << "Error" << std::endl;
+        exit(1);
+    }
+    
+    for (int i = 1; i < argc - 1; i+=2)
         this->check_input(argv[i], argv[i+1]);
     
     this->print_before(argv);
     this->F_all(argc, argv);
     struct timeval  start, end;
 
-    this->sort(argc, argv, this->_v, this->_v1, this->_v2, start);
-    this->print_after(start, end, this->_v2);
+    this->sort(this->_v, this->_v1, this->_v2, start);
+    this->print_after(start, end, this->_v2, argc);
     
-    this->sort(argc, argv, this->_d, this->_d1, this->_d2, start);
-    this->print_after(start, end, this->_d2);
+    this->sort(this->_d, this->_d1, this->_d2, start);
+    this->print_after(start, end, this->_d2, argc);
 }
 
 template <typename T>
-void    PmergeMe::print_after(struct timeval &start, struct timeval &end, T &container)
+void    PmergeMe::print_after(struct timeval &start, struct timeval &end, T &container, int argc)
 {
     std::cout << "After: ";
-
+    (void)argc;
     for (size_t i = 0; i < container.size(); i++)
         std::cout << container[i] << " ";
     
@@ -51,7 +58,7 @@ void    PmergeMe::print_after(struct timeval &start, struct timeval &end, T &con
 }
 
 template <typename T, typename T1, typename T2>
-void    PmergeMe::sort(int argc, char **argv, T &container, T1 &container1, T2 &container2, struct timeval &start)
+void    PmergeMe::sort(T &container, T1 &container1, T2 &container2, struct timeval &start)
 {
 
     gettimeofday(&start, NULL);
@@ -83,7 +90,7 @@ void    PmergeMe::F_all(int argc, char **argv)
             this->_v.push_back(std::make_pair(std::atoi(argv[i]), std::atoi(argv[i + 1])));
         }
     }
-    for (size_t i = 1; i < argc; i+=2)
+    for (int i = 1; i < argc; i+=2)
     {
         if (isdigit(*argv[i]))
         {
