@@ -13,7 +13,9 @@ PmergeMe::PmergeMe(int argc, char **argv)
         }
         argc -= 1;
     }
-
+    for (size_t i = 1; i < argc - 1; i+=2)
+        this->check_input(argv[i], argv[i+1]);
+    
     this->print_before(argv);
     this->F_all(argc, argv);
     struct timeval  start, end;
@@ -94,9 +96,14 @@ void    PmergeMe::F_all(int argc, char **argv)
 
 void    PmergeMe::check_input(char *argv, char *argv1)
 {
-    if (std::atoi(argv) < 0 || std::atoi(argv1) < 0 || isalpha(*argv) || isalpha(*argv1))
+    if (std::atoi(argv) < 0 || isalpha(*argv))
     {
-        std::cout << "Error: " << argv << " or " << argv1 << " is not a valid number" << std::endl;
+        std::cout << "Error: " << argv << " is not a valid number" << std::endl;
+        exit(1);
+    }
+    if (std::atoi(argv1) < 0 || isalpha(*argv1))
+    {
+        std::cout << "Error: " << argv1 << " is not a valid number" << std::endl;
         exit(1);
     }
 }
