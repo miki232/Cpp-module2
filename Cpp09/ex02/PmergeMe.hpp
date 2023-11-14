@@ -12,15 +12,14 @@
 #include <climits>
 #include <list>
 #include <typeinfo>
+#include <iomanip>
 
 class PmergeMe
 {
     private:
-        std::vector<std::pair<unsigned int, unsigned int> > _v;
         std::vector<unsigned int> _v1;
         std::vector<unsigned int> _v2;
 
-        std::deque<std::pair<unsigned int, unsigned int> > _d;
         std::deque<unsigned int> _d1;
         std::deque<unsigned int> _d2;
 
@@ -34,14 +33,13 @@ class PmergeMe
         void    print_before(char **argv);
 
         template <typename T>
-        void    print_after(struct timeval &end, struct timeval &start, T &container, int argc);
+        void    print_after(struct timeval &end, struct timeval &start, T &container);
         
-        void    F_all(int argc, char **argv);
         void    check_input(char *argv, char *argv1);
         
-        template <typename T, typename T1, typename T2>
-        void    sort(T &container, T1 &container1, T2 &container2, struct timeval &start);
-        
+        void _vecSort(int len, char **sequence);
+        void _dequesort(int len, char **sequence);
+
 };
 
 
